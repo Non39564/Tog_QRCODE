@@ -1,8 +1,58 @@
 from datetime import datetime
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, send_file
 import pymysql
+import pyqrcode
+import flask ,flask_login
 app = Flask(__name__)
+app.secret_key = 'ajbvfwje;qkfneqjoiio214812-9836'
+login_manager = flask_login.LoginManager()
+login_manager.init_app(app)
 
+users = {'admin': {'password': 'admin'}}
+class User(flask_login.UserMixin):
+    pass
+
+@login_manager.user_loader
+def user_loader(email):
+    if email not in users:
+        return
+
+    user = User()
+    user.id = email
+    return user
+
+@login_manager.request_loader
+def request_loader(request):
+    email = request.form.get('email')
+    if email not in users:
+        return
+
+    user = User()
+    user.id = email
+    return user
+
+@app.route('/loginforgen', methods=['GET', 'POST'])
+def loginforgen():
+    if flask.request.method == 'GET':
+        return render_template('login.html')
+
+    email = flask.request.form['email']
+    if email in users and flask.request.form['password'] == users[email]['password']:
+        user = User()
+        user.id = email
+        flask_login.login_user(user)
+        return flask.redirect(flask.url_for('protected'))
+
+    return 'Bad login'
+
+@app.route('/protected')
+@flask_login.login_required
+def protected():
+    return render_template('QrGenerate.html')
+
+@login_manager.unauthorized_handler
+def unauthorized_handler():
+    return render_template('login.html')
 
 def getConnection ():
     return pymysql.connect(
@@ -22,8 +72,6 @@ def showUser():
     user = cursor.fetchall()
     return user   
 
-
-
 @app.route('/')
 def showuser():
     user = showUser()
@@ -35,6 +83,11 @@ def showuser():
     res = cursor.fetchall()
     return render_template('dashboard.html',user=user,res=res)
 
+@app.route('/logout')
+def logout():
+    flask_login.logout_user()
+    return showuser()
+
 @app.route('/table')
 def table():
     user = showUser()
@@ -43,7 +96,6 @@ def table():
 @app.route('/test01')
 def test01():
     return render_template('test.html')
-
 
 @app.route('/tablesearch', methods=['GET', 'POST'])
 def tablesearch():
@@ -99,7 +151,6 @@ def chart_DWMY():
     res = cursor.fetchall()
     return render_template('charts.html',res=res) 
     
-
 @app.route('/chartsearch', methods=['GET', 'POST'])
 def chartsearch():
     startday = request.args.get('startdaterange')
@@ -141,9 +192,6 @@ def table_DWMY():
     user = cursor.fetchall()
     return render_template('table.html',user=user) 
     
-        
-
-
 @app.route('/home', methods=['GET', 'POST'])
 def login():
     username = request.args.get('username')
@@ -214,6 +262,17 @@ def resultsave():
     print(a)
     print("tab closed")
     return render_template('index2.html')
+
+@app.route('/genqr', methods=['GET', 'POST'])
+def genqr():
+   name = request.args.get('name')
+   username = request.args.get('username')
+   agency = request.args.get('agency')
+   url = "https://a41e-184-82-103-244.ap.ngrok.io"
+   qr = pyqrcode.create(url+"/home?username="+username)
+   qrcode = qr.png("qrcode.png", scale=6)
+   return send_file("qrcode.png", mimetype='image/png', attachment_filename=f'{username}.png', as_attachment=True)
+
 
 
 if __name__ == '__main__':
