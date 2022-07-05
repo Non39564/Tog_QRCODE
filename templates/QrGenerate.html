@@ -6,84 +6,90 @@
 <body>
   {% block content %}
   <div
-      class="container-fluid"
-      style="
-        padding-left: 0px;
-        padding-right: 0px;
-        padding-bottom: 0px;
-        padding-top: 0px;
-        border: 20px solid #62f114;
-      "
-    >
-      <div class="card">
-        <div class="card-body">
-          <div class="row">
-            <div id="card">
-        <div id="card-content">
-          <div id="card-title">
-            <h2>Generate QrCode</h2>
-          </div>
-          <form class="form" action="{{ url_for('genqr') }}">
-            <label for="user-email" style="padding-top: 13px">
-              &nbsp;Name
-            </label><br>
-            <input
-              id="user-email"
-              class="form-content"
-              type="text"
-              name="name"
-              autocomplete="on"
-              required
-            />
-            <div class="form-border"></div>
-            <!-- <label for="user-email" style="padding-top:13px">
+    class="container-fluid"
+    style="
+      padding-left: 0px;
+      padding-right: 0px;
+      padding-bottom: 0px;
+      padding-top: 0px;
+      border: 20px solid #62f114;
+    "
+  >
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div id="card">
+            <div id="card-content">
+              <div id="card-title">
+                <h2>Generate QrCode</h2>
+              </div>
+              <form class="form" action="{{ url_for('genqr') }}">
+                <label for="user-email" style="padding-top: 13px">
+                  &nbsp;Employee ID </label
+                ><br />
+                <input
+                  id="user-email"
+                  class="form-content"
+                  type="text"
+                  name="username"
+                  autocomplete="on"
+                  required
+                />
+                <div class="form-border"></div>
+                <!-- <label for="user-email" style="padding-top:13px">
                       &nbsp;เยอะๆ
                     </label>
                   <textarea id="user-email" class="form-content" type="email" name="email" rows="6" autocomplete="on" required ></textarea>
                   <div class="form-border"></div> -->
-            <label for="user-email" style="padding-top: 13px">
-              &nbsp;Username
-            </label><br>
-            <input
-              id="user-email"
-              class="form-content"
-              type="text"
-              name="username"
-              autocomplete="on"
-              required
-            />
-            <div class="form-border"></div>
-            <label for="user-email" style="padding-top: 13px">
-              &nbsp;Agency
-            </label><br>
-            <input
-              id="user-email"
-              class="form-content"
-              type="text"
-              name="agency"
-              autocomplete="on"
-              required
-            />
-            <div class="form-border"></div>
+                <label for="user-email" style="padding-top: 13px">
+                  &nbsp;Name </label
+                ><br />
+                <input
+                  id="user-email"
+                  class="form-content"
+                  type="text"
+                  name="name"
+                  autocomplete="on"
+                  required
+                />
 
-            <input id="submit-btn" type="submit" name="submit" value="Generate" />
-            <button
-            id="submit-btn-logout"
-            type="button"
-            onclick="window.location.href='{{ url_for( 'logout' ) }}';"
-          >
-            Logout
-          </button>
-          </form>
-          
-          <div class="bottomRight"></div>
-          <!-- <input id="submit-btn" type="submit" name="submit" value="Import-Exel" /> -->
-        </div>
-      </div>
+                <div class="form-border"></div>
+                <label for="user-email" style="padding-top: 13px">
+                  &nbsp;Agency </label
+                ><br />
+                <input
+                  id="user-email"
+                  class="form-content"
+                  type="text"
+                  name="agency"
+                  autocomplete="on"
+                  required
+                />
+                <div class="form-border"></div>
+
+                <input
+                  id="submit-btn"
+                  type="submit"
+                  name="submit"
+                  value="Generate"
+                />
+                <button
+                  id="submit-btn-logout"
+                  type="button"
+                  onclick="window.location.href='{{ url_for( 'logout' ) }}';"
+                >
+                  Logout
+                </button>
+              </form>
+
+              <div class="bottomRight"></div>
+              <!-- <input id="submit-btn" type="submit" name="submit" value="Import-Exel" /> -->
+            </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
   {% endblock %}
 </body>
