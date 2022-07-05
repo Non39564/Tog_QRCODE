@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en" style="background-color: #3399ff;">
+  <head>
+  	<title>Username : {{username}}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<link rel="stylesheet" href="/static/css2/style.css">
+
+	<!-- icon -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+	<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+
+	<link rel="stylesheet" href="/static/css2/Alertstyle.css">
+	<script src="/static/js2/Script.js"></script>
+
+	<script>
+		function myFunction() {
+		alert("บันทึกเสร็จสิ้น");
+
+		}
+	</script>
+
+	<!-- <script type="text/javascript">
+        window.onload = function() {
+            alert("loaded");
+            window.close();
+        }
+    </script> -->
+	<script type="text/javascript">
+        function disableBack() { window.history.forward(); }
+        setTimeout("disableBack()", 0);
+        window.onunload = function () { null };
+	</script>
+
+	</head>
+	<body>
+	<section class="ftco-section" 
+				style="	padding-top: 25px;padding-bottom: 25px;  
+						background: linear-gradient(to bottom, #003399 0%, #3399ff 100%);">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-6 col-lg-4">
+					<div class="login-wrap py-5" style="background-color: beige;">
+		      	<h3 class="text-center mb-0" style="color: black; "><B>Username :</B>  {{username}}</h3><br>
+			<form action="{{ url_for('savecontainer') }}" class="login-form">
+				<div class="row">
+					<div class="col">
+						<div class="form-group">
+							
+	            			<button 
+							onclick="myFunction()"
+							type="submit"  value="Van01" id="container" name="container" class="btn form-control  rounded submit px-3" 
+							style="background-color: #004284;">
+								<i class="fas fa-shuttle-van"></i> Van01
+								<input type="hidden" name = "username" id="username" value="{{ username }}"/> 
+								<input type="hidden" name = "day" value="{{ day }}"/> 
+								<input type="hidden" name = "time" value="{{ time }}"/> 
+							</button>
+	            		</div>
+					</div>
+					<div class="col" >
+						<div class="form-group">
+							<button 
+							onclick="myFunction()"
+							type="submit" value="Van02" id="container" name="container" class="btn form-control rounded submit px-3" style="background-color: #004284;">
+								<i class="fas fa-shuttle-van"></i> Van02
+								<input type="hidden" name = "username" id="username" value="{{ username }}"/> 
+								<input type="hidden" name = "day" value="{{ day }}"/> 
+								<input type="hidden" name = "time" value="{{ time }}"/> 
+							</button>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col" >
+						<div class="form-group">
+							<button 
+							onclick="myFunction()"
+							type="submit" value="Van03" id="container" name="container"
+							class="btn form-control rounded submit px-3" style="background-color: #004284;">
+								<i class="fas fa-shuttle-van"></i> Van03
+								<input type="hidden" name = "username" id="username" value="{{ username }}"/> 
+								<input type="hidden" name = "day" value="{{ day }}"/> 
+								<input type="hidden" name = "time" value="{{ time }}"/> 
+							</button>
+						</div>
+					</div>
+					<div class="col" >
+						<div class="form-group">
+							<button 
+							onclick="myFunction()"
+							type="submit" value="Van04" id="container" name="container" 
+							class="btn form-control rounded submit px-3" style="background-color: #004284;">
+								<i class="fas fa-shuttle-van"></i> Van04
+								<input type="hidden" name = "username" id="username" value="{{ username }}"/> 
+								<input type="hidden" name = "day" value="{{ day }}"/> 
+								<input type="hidden" name = "time" value="{{ time }}"/> 
+							</button>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col" >
+						<div class="form-group">
+	            			<button 
+							onclick="myFunction()"
+							type="submit" value="Van05" id="container" name="container" 
+							class="btn form-control rounded submit px-3"  style="background-color: #004284;">
+								<i class="fas fa-shuttle-van"></i> Van05
+								<input type="hidden" name = "username" id="username" value="{{ username }}"/> 
+								<input type="hidden" name = "day" value="{{ day }}"/> 
+								<input type="hidden" name = "time" value="{{ time }}"/> 
+							</button>
+	            		</div>
+					</div>
+					<div class="col" >
+						<div class="form-group">
+							<button 
+							onclick="myFunction()"
+							type="submit" value="Van06" id="container" name="container" 
+							class="btn form-control rounded submit px-3" style="background-color: #004284;">
+								<i class="fas fa-shuttle-van"></i> Van06
+								<input type="hidden" name = "username" id="username" value="{{ username }}"/> 
+								<input type="hidden" name = "day" value="{{ day }}"/> 
+								<input type="hidden" name = "time" value="{{ time }}"/> 
+							</button>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col" >
+						<div class="form-group">
+	            			<button 
+							onclick="myFunction()"
+							type="submit" value="Van07" id="container" name="container" 
+							class="btn form-control rounded submit px-3" style="background-color: #004284;">
+								<i class="fas fa-shuttle-van"></i> Van07
+								<input type="hidden" name = "username" id="username" value="{{ username }}"/> 
+								<input type="hidden" name = "day" value="{{ day }}"/> 
+								<input type="hidden" name = "time" value="{{ time }}"/> 
+							</button>
+	            		</div>
+					</div>
+					<div class="col" >
+						<div class="form-group">
+							<button 
+							onclick="myFunction()"
+							type="submit" value="Van08" id="container" name="container"  
+							class="btn form-control rounded submit px-3" style="background-color: #004284;">
+								<i class="fa fa-bus"></i> Van08
+								<input type="hidden" name = "username" id="username" value="{{ username }}"/> 
+								<input type="hidden" name = "day" value="{{ day }}"/> 
+								<input type="hidden" name = "time" value="{{ time }}"/> 
+							</button>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col" >
+						<div class="form-group">
+	            			<button 
+							onclick="myFunction()"
+							type="submit" value="Van09" id="container" name="container" 
+							class="btn form-control rounded submit px-3" style="background-color: #004284;">
+								<i class="fas fa-shuttle-van"></i> Van09
+								<input type="hidden" name = "username" id="username" value="{{ username }}"/> 
+								<input type="hidden" name = "day" value="{{ day }}"/> 
+								<input type="hidden" name = "time" value="{{ time }}"/> 
+							</button>
+	            		</div>
+					</div>
+					<div class="col" >
+						<div class="form-group">
+							<button 
+							onclick="myFunction()"
+							type="submit" value="Van10" id="container" name="container"  
+							class="btn form-control rounded submit px-3" style="background-color: #004284;">
+								<i class="fa fa-bus"></i> Van10
+								<input type="hidden" name = "username" id="username" value="{{ username }}"/> 
+								<input type="hidden" name = "day" value="{{ day }}"/> 
+								<input type="hidden" name = "time" value="{{ time }}"/> 
+							</button>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col" >
+						<div class="form-group">
+	            			<button 
+							onclick="myFunction()"
+							type="submit" value="Bus01" id="container" name="container"  
+							class="btn form-control rounded submit px-3" style="background-color: #004284;">
+								<i class="fa fa-bus"></i> Bus01
+								<input type="hidden" name = "username" id="username" value="{{ username }}"/> 
+								<input type="hidden" name = "day" value="{{ day }}"/> 
+								<input type="hidden" name = "time" value="{{ time }}"/> 
+							</button>
+	            		</div>
+					</div>
+					<div class="col" >
+						<div class="form-group">
+							<button 
+							onclick="myFunction()"
+							type="submit" value="Bus02" id="container" name="container"
+							class="btn form-control rounded submit px-3" style="background-color: #004284;">
+								<i class="fa fa-bus"></i> Bus02
+								<input type="hidden" name = "username" id="username" value="{{ username }}"/> 
+								<input type="hidden" name = "day" value="{{ day }}"/> 
+								<input type="hidden" name = "time" value="{{ time }}"/> 
+							</button>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col" >
+						<div class="form-group">
+	            			<button 
+							onclick="myFunction()"
+							type="submit" value="Bus03" id="container" name="container"  
+							class="btn form-control rounded submit px-3" style="background-color: #004284;">
+								<i class="fa fa-bus"></i> Bus03
+								<input type="hidden" name = "username" id="username" value="{{ username }}"/> 
+								<input type="hidden" name = "day" value="{{ day }}"/> 
+								<input type="hidden" name = "time" value="{{ time }}"/> 
+							</button>
+	            		</div>
+					</div>
+					<div class="col" >
+						<div class="form-group">
+							<button 
+							onclick="myFunction()"
+							type="submit" value="Bus04" id="container" name="container"
+							class="btn form-control rounded submit px-3" style="background-color: #004284;">
+								<i class="fa fa-bus"></i> Bus04
+								<input type="hidden" name = "username" id="username" value="{{ username }}"/> 
+								<input type="hidden" name = "day" value="{{ day }}"/> 
+								<input type="hidden" name = "time" value="{{ time }}"/> 
+							</button>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col" >
+						<div class="form-group">
+							<button 
+							onclick="myFunction()"
+							type="submit" value="Bus05" id="container" name="container"
+							class="btn form-control rounded submit px-3" style="background-color: #004284;">
+								<i class="fa fa-bus"></i> Bus05
+								<input type="hidden" name = "username" id="username" value="{{ username }}"/> 
+								<input type="hidden" name = "day" value="{{ day }}"/> 
+								<input type="hidden" name = "time" value="{{ time }}"/> 
+							</button>
+						</div>
+					</div>
+					<div class="col" >
+						<div class="form-group">
+						
+						</div>
+					</div>
+				</div>
+	        </form>
+	        </div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	<script src="/static/js2/jquery.min.js"></script>
+  <script src="/static/js2/popper.js"></script>
+  <script src="/static/js2/bootstrap.min.js"></script>
+  <script src="/static/js2/main.js"></script>
+
+	</body>
+</html>
+
