@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+<head>
+    {% block title %}Chart | {% endblock %}
+</head>
+
+<body>
+    {% block content %}
+    <div class="page-breadcrumb">
+        <div class="row align-items-center">
+            <div class="col-5">
+                <h4 class="page-title">Chart</h4>
+            </div>
+        </div>
+    </div>
+            <div class="container-fluid">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-body">
+                                                    <form action="{{ url_for('chartsearch') }}">
+                                                        <div class="d-md-flex">
+                                                            <input type="date"  name="startdaterange" id="startdaterange" />
+                                                            &nbsp;&nbsp;<h5 style="margin-top: 5px;">To</h5>&nbsp;&nbsp;
+                                                            <input type="date"  name="stopdaterange"  id="stopdaterange" />&nbsp;&nbsp;
+                                                            <button type="submit" class="btn btn-secondary text-black" value="Submit">ค้นหา</button>
+                                                        </div>
+                                                    </form>
+                                            </div>
+                                            <!-- Dropdown Date -->
+                                                <div style="display: flex; justify-content: flex-end">
+                                                    <select id="dynamic_select">
+                                                        <option value="/chart_DWMY?type=All" selected>Date</option>
+                                                        <option value="/chart_DWMY?type=All" >All</option>
+                                                        <option value="/chart_DWMY?type=Daily">Daily</option>
+                                                        <option value="/chart_DWMY?type=Weekly">Weekly</option>
+                                                        <option value="/chart_DWMY?type=Monthly">Monthly</option>
+                                                        <option value="/chart_DWMY?type=Yearly">Yearly</option>
+                                                    </select>
+                                                </div>
+                                    <!-- title -->
+                                    </div>
+                                    
+                                </div>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <!-- column -->
+                                            <div id="columnchart_material" class="chart-container"></div>
+                                            <!-- column -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+        </div>
+    </div>
+    {% endblock %}
+</body>

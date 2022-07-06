@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/static/dist/css/QrGenerate.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <link
+      rel="canonical"
+      href="https://www.wrappixel.com/templates/xtreme-admin-lite/"
+    />
+    <!-- Favicon icon -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../static/assets/images/favicon.png"
+    />
+    <!-- Custom CSS -->
+    <link
+      href="../static/assets/libs/chartist/dist/chartist.min.css"
+      rel="stylesheet"
+    />
+    <!-- Custom CSS -->
+    <link href="../static/dist/css/style.min.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!-- Date time Pick -->
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"
+    />
+
+    <!-- Sidebar -->
+    <link href="../static/dist/css/sidebar.scss" />
+
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <style type="text/css">
+      .material-icons.md-48 {
+        font-size: 48px;
+      }
+    </style>
+
+    <!-- Area Chart -->
+    <script
+      type="text/javascript"
+      src="https://www.gstatic.com/charts/loader.js"
+    ></script>
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+  
+        function drawChart() {
+          var data = google.visualization.arrayToDataTable([
+          ['Container', 'Van01','Van02','Van03','Van04','Van05','Van06','Van07','Van08','Van09','Van10','Bus01','Bus02','Bus03','Bus04','Bus05'],
+            {% for res in res %}
+            ['{{res['Date']}}', {{res['Van01']}}, {{res['Van02']}}, {{res['Van03']}}, {{res['Van04']}}, {{res['Van05']}}, {{res['Van06']}}, {{res['Van07']}} , {{res['Van08']}}, {{res['Van09']}}, {{res['Van10']}}, {{res['Bus01']}}, {{res['Bus02']}}, {{res['Bus03']}}, {{res['Bus04']}}, {{res['Bus05']}}],
+            {% endfor %}
+          ]);
+  
+          var options = {
+            title: 'Company Container',
+            hAxis: {title: 'Year-Month-Day',  titleTextStyle: {color: '#333'}},
+            vAxis: {minValue: 0}
+          };
+  
+          var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+          chart.draw(data, options);
+        }
+  
+        $(window).resize(function(){
+          drawChart();
+        });
+      </script>
+      <script type="text/javascript">
+        google.charts.load('current', {'packages':['bar']});
+        google.charts.setOnLoadCallback(drawChart);
+  
+        function drawChart() {
+          var data = new google.visualization.arrayToDataTable([
+          ['Container', 'Van01','Van02','Van03','Van04','Van05','Van06','Van07','Van08','Van09','Van10','Bus01','Bus02','Bus03','Bus04','Bus05'],
+          {% for res in res %}
+          ['{{res['Date']}}', {{res['Van01']}}, {{res['Van02']}}, {{res['Van03']}}, {{res['Van04']}}, {{res['Van05']}}, {{res['Van06']}}, {{res['Van07']}} , {{res['Van08']}}, {{res['Van09']}}, {{res['Van10']}}, {{res['Bus01']}}, {{res['Bus02']}}, {{res['Bus03']}}, {{res['Bus04']}}, {{res['Bus05']}}],
+          {% endfor %}
+       ]);
+  
+          var options = {
+              chartArea: {
+                  height: '100%',
+                  width: '100%',
+                  top: 48,
+                  left: 48,
+                  right: 16,
+                  bottom: 48
+                },
+                height: '100%',
+                width: '100%',
+          };
+  
+          var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+          
+          chart.draw(data, google.charts.Bar.convertOptions(options));
+        }
+        $(window).resize(function(){
+          drawChart();
+        });
+        
+      </script>
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <title>{% block title %}{% endblock %}Dashboard</title>
+    {% block head %} {% endblock %}
+  </head>
+  <body>
+    <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
+        data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
+            <div class="navbar-header" data-logobg="skin5">
+                <!-- ============================================================== -->
+                <!-- Logo -->
+                <!-- ============================================================== -->
+
+                <!-- ============================================================== -->
+                <!-- End Logo -->
+                <!-- ============================================================== -->
+                <!-- This is for the sidebar toggle which is visible on mobile only -->
+                <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)">
+                    <i class="fa fa-bars" aria-hidden="true" style="color:black;font-size:30px;"></i>
+                </a>
+            </div>
+        <!-- ============================================================== -->
+        <!-- End Logo -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <aside class="left-sidebar position-fixed" data-sidebarbg="skin6">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar">
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+                        <!-- User Profile-->
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="/" aria-expanded="false"><i class="material-icons md-48">dashboard</i><span
+                                    class="hide-menu">Dashboard</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="/table" aria-expanded="false"><i class="fa fa-table"></i><span
+                                    class="hide-menu">Table</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="/chart" aria-expanded="false"><i class="fa fa-chart-bar"></i><span
+                                    class="hide-menu">Chart</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="/protected" aria-expanded="false"><i class="fa fa-qrcode"></i><span 
+                                class="hide-menu">Generate QrCode</span></a></li>
+                    </ul>
+    
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+        </aside>
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper" data-navbarbg="skin5" data-header-position="absolute" data-boxed-layout="full">
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+    {% block content %} {% endblock %} {% block footer %} {% endblock %}
+
+    <script src="../static/assets/libs/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="../static/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../static/dist/js/app-style-switcher.js"></script>
+    <!--Wave Effects -->
+    <script src="../static/dist/js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="../static/dist/js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="../static/dist/js/custom.js"></script>
+    <!--This page JavaScript -->
+    <!--chartis chart-->
+    <script src="../static/assets/libs/chartist/dist/chartist.min.js"></script>
+    <script src="../static/assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
+    <script src="../static/dist/js/pages/dashboards/dashboard1.js"></script>
+    <!--Datetime-->
+    <script>
+      $(function () {
+        $('input[name="daterange"]').daterangepicker(
+          {
+            opens: "left",
+          },
+          function (start, end, label) {
+            console.log(
+              "A new date selection was made: " +
+                start.format("DD-MM-YYYY") +
+                " to " +
+                end.format("DD-MM-YYYY")
+            );
+          }
+        );
+      });
+    </script>
+    <!-- Search -->
+    <script>
+      function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("searchInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("datatable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+          td = tr[i].getElementsByTagName("td")[0];
+          if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+              tr[i].style.display = "";
+            } else {
+              tr[i].style.display = "none";
+            }
+          }
+        }
+      }
+    </script>
+    <!-- scroll bar -->
+
+    <script>
+      $(window).scroll(function () {
+        var target = $(window).scrollTop();
+        var alturaA = $(".col--small").offset().top;
+        var alturaB =
+          alturaA + $(".col--small").height() - 32 - $(".block").height();
+
+        console.log(target + " " + alturaA + " " + alturaB);
+        if (target > alturaB) {
+          $(".block").css("margin-top", alturaB - alturaA + "px");
+        } else if (target > alturaA && target < alturaB) {
+          $(".block").css("margin-top", target - alturaA + "px");
+        } else {
+          $(".block").css("margin-top", "0");
+        }
+      });
+    </script>
+
+    <script>
+      $(function () {
+        // bind change event to select
+        $("#dynamic_select").on("change", function () {
+          var url = $(this).val(); // get selected value
+          if (url) {
+            // require a URL
+            window.location = url; // redirect
+          }
+          return false;
+        });
+      });
+    </script>
+    <!-- Search Van-->
+    <script>
+      function seachcontainer() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("Searchcontainer");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("datatable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+          td = tr[i].getElementsByTagName("td")[1];
+          if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+              tr[i].style.display = "";
+            } else {
+              tr[i].style.display = "none";
+            }
+          }
+        }
+      }
+    </script>
+    <script>
+      function fnExcelReport() {
+        var tab_text = "<table border='2px'><tr bgcolor='#87AFC6'>";
+        var textRange;
+        var j = 0;
+        tab = document.getElementById("datatable"); // id of table
+
+        for (j = 0; j < tab.rows.length; j++) {
+          tab_text = tab_text + tab.rows[j].innerHTML + "</tr>";
+          //tab_text=tab_text+"</tr>";
+        }
+
+        tab_text = tab_text + "</table>";
+        tab_text = tab_text.replace(/<A[^>]*>|<\/A>/g, ""); //remove if u want links in your table
+        tab_text = tab_text.replace(/<img[^>]*>/gi, ""); // remove if u want images in your table
+        tab_text = tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
+
+        var ua = window.navigator.userAgent;
+        var msie = ua.indexOf("MSIE ");
+
+        if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) {
+          // If Internet Explorer
+          txtArea1.document.open("txt/html", "replace");
+          txtArea1.document.write(tab_text);
+          txtArea1.document.close();
+          txtArea1.focus();
+          sa = txtArea1.document.execCommand(
+            "SaveAs",
+            true,
+            "Say Thanks to Sumit.xls"
+          );
+        } //other browser not tested on IE 11
+        else
+          sa = window.open(
+            "data:application/vnd.ms-excel," + encodeURIComponent(tab_text)
+          );
+
+        return sa;
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+<head>
+    
+</head>
+
+<body>
+    {% block content %}
+    <div class="page-breadcrumb">
+        <div class="row align-items-center">
+            <div class="col-5">
+                <h4 class="page-title">Dashboard</h4>
+            </div>
+        </div>
+    </div>
+            <div class="container-fluid" 
+            style="padding-left: 0px;padding-right: 0px;padding-bottom: 0px;padding-top: 0px
+            ; border: 20px solid rgb(34, 69, 172) " >
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <!-- column -->
+                                    <div id="chart_div" style="width: 100%; height: 500px;"></div>
+                                    <!-- column -->
+                                </div>
+                            </div>
+                        </div>
+            </div>
+                <div class="row">
+                    <!-- column -->
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <!-- title -->
+                                <div class="d-md-flex">
+                                    <div class="card-body">
+                                                <input type="text" id="searchInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+                                                <br></br>
+                                            </div>
+                                        </div>
+                                        <!-- title -->
+                                    </div>
+                                </div>
+                                <!-- title -->
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table v-middle" id="datatable">
+                                    <thead>
+                                        <tr class="bg-light">
+                                            <th class="border-top-0">Username</th>
+                                            <th class="border-top-0">Container</th>
+                                            <th class="border-top-0">Date</th>
+                                            <th class="border-top-0">Time</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for user in user %}
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="">
+                                                        <h4 class="m-b-0 font-16">{{ user['Username'] }}</h4>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>{{ user['Container'] }}</td>
+                                            <td>{{ user['Date'] }}</td>
+                                            <td>
+                                                <label class="label label-success">{{ user['Time'] }}</label>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+    {% endblock %}
+</body>

@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+<head>
+    {% block title %}Table | {% endblock %}
+</head>
+<body>
+    {% block content %}
+    <div class="page-breadcrumb">
+        <div class="row align-items-center">
+            <div class="col-5">
+                <h4 class="page-title">Table</h4>
+            </div>
+        </div>
+    </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-md-flex">
+                                    <div style="margin-top: 20px;">
+                                        <h4 class="card-title">Search</h4>
+                                    </div>
+                                    <div class="card-body">
+                                            <input type="text" id="searchInput" onkeyup="myFunction()" placeholder="Search Employee Code..." title="Type in a name">
+                                            <br></br>
+                                            <form action="{{ url_for('tablesearch') }}">
+                                                <div class="d-md-flex">
+                                                    <input type="date" id="startdaterange" name="startdaterange" value="01/01/2018 - 01/15/2018" />
+                                                    &nbsp;&nbsp;<h5 style="margin-top: 8px;">To</h5>&nbsp;&nbsp;
+                                                    <input type="date" id="stopdaterange" name="stopdaterange" value="01/01/2018 - 01/15/2018" />&nbsp;&nbsp;
+                                                    <button type="submit" class="btn btn-secondary text-black" value="Submit">ค้นหา</button>
+                                                <div>
+                                            </form><br>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                                 
+                                <iframe id="txtArea1" style="display:none"></iframe>
+                                <button id="btnExport" class="btn btn-success btn-rounded text-white" onclick="fnExcelReport()">Export to Excel</button>
+                                <!-- Dropdown Date -->
+                                <div style="display: flex; justify-content: flex-end">
+                                    <!-- Dropdown Van -->
+                                    <select id="Searchcontainer" onclick="seachcontainer()">
+                                        <option value="" selected>Container</option>
+                                        <option value="">All</option>
+                                        <option value="Van01">Van01</option>
+                                        <option value="Van02">Van02</option>
+                                        <option value="Van03">Van03</option>
+                                        <option value="Van04">Van04</option>
+                                        <option value="Van05">Van05</option>
+                                        <option value="Van06">Van06</option>
+                                        <option value="Van07">Van07</option>
+                                        <option value="Van08">Van08</option>
+                                        <option value="Van09">Van09</option>
+                                        <option value="Van10">Van10</option>
+                                        <option value="Bus01">Bus01</option>
+                                        <option value="Bus02">Bus02</option>
+                                        <option value="Bus03">Bus03</option>
+                                        <option value="Bus04">Bus04</option>
+                                        <option value="Bus05">Bus05</option>
+                                    </select>&nbsp;&nbsp;
+                                    <select id="dynamic_select">
+                                        <option value="/chart_DWMY?type=All" selected>Date</option>
+                                        <option value="/table_DWMY?type=All" >All</option>
+                                        <option value="/table_DWMY?type=Daily">Daily</option>
+                                        <option value="/table_DWMY?type=Weekly">Weekly</option>
+                                        <option value="/table_DWMY?type=Monthly">Monthly</option>
+                                        <option value="/table_DWMY?type=Yearly">Yearly</option>
+                                      </select>
+                                </div>
+                                <!-- title -->
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table v-middle" id="datatable">
+                                    <thead>
+                                        <tr class="bg-light">
+                                            <th class="border-top-0">Employee Code</th>
+                                            <th class="border-top-0">Container</th>
+                                            <th class="border-top-0">Date</th>
+                                            <th class="border-top-0">Time</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for user in user %}
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="">
+                                                        <h4 class="m-b-0 font-16">{{ user['Username'] }}</h4>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>{{ user['Container'] }}</td>
+                                            <td>{{ user['Date'] }}</td>
+                                            <td>
+                                                <label class="label label-success">{{ user['Time'] }}</label>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+    {% endblock %}
+</body>

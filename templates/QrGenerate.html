@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+<head>
+  {% block title %}GenQR | {% endblock %}
+</head>
+
+<body>
+  {% block content %}
+  <div
+    class="container-fluid"
+    style="
+      padding-left: 0px;
+      padding-right: 0px;
+      padding-bottom: 0px;
+      padding-top: 0px;
+      border: 20px solid #62f114;
+    "
+  >
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div id="card">
+            <div id="card-content">
+              <div id="card-title">
+                <h2>Generate QrCode</h2>
+              </div>
+              <form class="form" action="{{ url_for('genqr') }}">
+                <label for="user-email" style="padding-top: 13px">
+                  &nbsp;Employee ID </label
+                >
+                <input
+                  id="user-email"
+                  class="form-content"
+                  type="text"
+                  name="username"
+                  autocomplete="on"
+                  required
+                />
+                <div class="form-border"></div>
+                <!-- <label for="user-email" style="padding-top:13px">
+                      &nbsp;เยอะๆ
+                    </label>
+                  <textarea id="user-email" class="form-content" type="email" name="email" rows="6" autocomplete="on" required ></textarea>
+                  <div class="form-border"></div> -->
+                <label for="user-email" style="padding-top: 13px">
+                  &nbsp;Name </label
+                >
+                <input
+                  id="user-email"
+                  class="form-content"
+                  type="text"
+                  name="name"
+                  autocomplete="on"
+                  required
+                />
+
+                <div class="form-border"></div>
+                <label for="user-email" style="padding-top: 13px">
+                  &nbsp;Department </label
+                >
+                <input
+                  id="user-email"
+                  class="form-content"
+                  type="text"
+                  name="department"
+                  autocomplete="on"
+                  required
+                />
+                <div class="form-border"></div>
+                <label for="user-email" style="padding-top: 13px">
+                  &nbsp;Factory </label
+                >
+                <input
+                  id="user-email"
+                  class="form-content"
+                  type="text"
+                  name="factory"
+                  autocomplete="on"
+                  placeholder="TOG or TOC"
+                  required
+                />
+                <div class="form-border"></div>
+                
+                
+                <input
+                  id="submit-btn"
+                  type="submit"
+                  name="submit"
+                  value="Generate"
+                />
+              </form><br><br>
+              <form class="form" action = "uploader" method = "POST" 
+              enctype = "multipart/form-data">
+                  <input  type = "file" name = "file" />
+                  <label for="user-email" style="padding-top: 13px">
+                    &nbsp;Factory </label
+                  >
+                  <input
+                    id="user-email"
+                    class="form-content"
+                    type="text"
+                    name="factoryexcel"
+                    autocomplete="on"
+                    placeholder="TOG or TOC"
+                    required
+                  />
+                  <div class="form-border"></div>
+                  <input id="submit-btn" class="input" type = "submit" value="Generate from Excel"/><br>
+                </form>
+                <div class="form">
+                <button 
+                  style="padding-top:10px"
+                  id="submit-btn-logout"
+                  type="button"
+                  onclick="window.location.href='{{ url_for( 'logout' ) }}';"
+                >
+                  Logout
+                </button>
+              </div>
+              <div class="bottomRight"></div>
+              <!-- <input id="submit-btn" type="submit" name="submit" value="Import-Exel" /> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endblock %}
+</body>
