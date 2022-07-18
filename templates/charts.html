@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 <head>
     {% block title %}Chart | {% endblock %}
+    <link rel="stylesheet" href="/static/dist/css/chart.css">
 </head>
 
 <body>
@@ -44,7 +45,8 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <!-- column -->
-                                            <div id="columnchart_material" class="chart-container"></div>
+                                            <div id="columnchart_material" class="chart-container" 
+                                            style="position: relative; width: 970px; height: 500px;"></div>
                                             <!-- column -->
                                         </div>
                                     </div>

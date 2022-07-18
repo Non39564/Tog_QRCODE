@@ -76,7 +76,6 @@
                   name="factory"
                   autocomplete="on"
                   placeholder="TOG or TOC"
-                  required
                 />
                 <div class="form-border"></div>
                 
@@ -101,11 +100,13 @@
                     name="factoryexcel"
                     autocomplete="on"
                     placeholder="TOG or TOC"
-                    required
                   />
                   <div class="form-border"></div>
                   <input id="submit-btn" class="input" type = "submit" value="Generate from Excel"/><br>
                 </form>
+                {% if msg %}
+                <p onload="load()"></p>
+                {% endif %}
                 <div class="form">
                 <button 
                   style="padding-top:10px"
@@ -127,3 +128,8 @@
 
   {% endblock %}
 </body>
+<script>
+  function load() {
+    alert("ชื่อคอลัมม์ไม่ถูกต้อง");
+  }
+  </script>

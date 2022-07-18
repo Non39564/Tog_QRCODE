@@ -81,7 +81,15 @@ def getConnection():
 
 def showUser():
     connection = getConnection()
-    sql = "SELECT * FROM user ORDER BY Date, Time DESC"
+    sql = "SELECT * FROM user ORDER BY Date DESC, Time DESC"
+    cursor = connection.cursor()
+    cursor.execute(sql)
+    user = cursor.fetchall()
+    return user
+
+def showUserToday():
+    connection = getConnection()
+    sql = "SELECT * FROM user WHERE Date LIKE CURDATE() ORDER BY Time DESC, Date DESC"
     cursor = connection.cursor()
     cursor.execute(sql)
     user = cursor.fetchall()
@@ -90,7 +98,7 @@ def showUser():
 
 @app.route('/')
 def showuser():
-    user = showUser()
+    user = showUserToday()
     connection = getConnection()
     cursor = connection.cursor()
     re = f"SELECT Date,SUM(Van01) Van01,SUM(Van02) Van02,SUM(Van03) Van03,SUM(Van04) Van04,SUM(Van05) Van05,SUM(Van06) Van06,SUM(Van07) Van07,SUM(Van08) Van08,SUM(Van09) Van09,SUM(Van10) Van10,SUM(Bus01) Bus01,SUM(Bus02) Bus02,SUM(Bus03) Bus03,SUM(Bus04) Bus04,SUM(Bus05) Bus05 FROM result  GROUP BY Date"
@@ -318,14 +326,11 @@ def genqr():
     dir = 'qrcode/test'
     for f in os.listdir(dir):
         os.remove(os.path.join(dir, f))
-        
-    print(GenerateUserNamelist)
-    if username not in GenerateUserNamelist:
-        GenerateUserNamelist.append(username)
+    if request.method == 'POST':    
         save = choicesave(username,name,department,factory)
         print(save)
         print("ไม่มีในระบบ")
-        url = "http://localhost:5000/"
+        url = "http://203.146.249.6/"
         qr = pyqrcode.create(url+"/home?username="+username)
         qrcode = qr.png("qrcode.png", scale=6)
         return send_file("qrcode.png", mimetype='image/png', attachment_filename=f'{username}.png', as_attachment=True)
@@ -340,44 +345,55 @@ def main():
 
 @app.route('/uploader', methods=['GET', 'POST'])
 def upload_file():
+    
+            
     UPLOAD_FOLDER = "./"
     if request.method == 'POST':
         f = request.files['file']
         factoryexcel = request.args.get('factoryexcel')
         f.save(os.path.join(UPLOAD_FOLDER, f.filename))
         df = pd.read_excel(f.filename, usecols="A,B,C")
-        print(len(df))        
-
-        dir = 'qrcode/qrcode'
-        for f in os.listdir(dir):
-            os.remove(os.path.join(dir, f))
+        print(len(df))    
+        
+        if 'รหัสพนักงาน' not in df.columns or  'ชื่อ-สกุล' not in df.columns or 'แผนก' not in df.columns:
+            msg = 'ชื่อคอลัมม์ไม่ถูกต้อง'
+            return render_template('QrGenerate.html',msg=msg)
+   
         for i in range(len(df)):
+            print(i)
             username = df['รหัสพนักงาน'][i]
             name = df['ชื่อ-สกุล'][i]
             agency = df['แผนก'][i]
-            if username not in GenerateUserNamelist:
-                GenerateUserNamelist.append(username)
-                connection = getConnection()
-                sql =''
-                if factoryexcel == 'TOG':
-                    sql = f"INSERT INTO employee(user, name, address) VALUES('%s', '%s', '%s')" % (username,
-                     name, agency)
-                if factoryexcel == 'TOC':
-                    sql = f"INSERT INTO employeetoc(user, name, address) VALUES('%s', '%s', '%s')" % (username,
+            
+            connection = getConnection()
+            if factoryexcel == 'TOG':
+                sql = f"INSERT INTO employee(user, name, address) VALUES('%s', '%s', '%s')" % (username,
                      name, agency)
                 cursor = connection.cursor()
                 cursor.execute(sql)
                 connection.commit()
-                url = "http://203.146.249.6/"
-                qr = pyqrcode.create(url+"/home?username="+str(username))
-                qrcode = qr.png("qrcode/test/"+str(username)+".png", scale=6)
+            if factoryexcel == 'TOC':
+                sql = f"INSERT INTO employeetoc(user, name, address) VALUES('%s', '%s', '%s')" % (username,
+                     name, agency)
+                cursor = connection.cursor()
+                cursor.execute(sql)
+                connection.commit()
+            url = "http://203.146.249.6/"
+            qr = pyqrcode.create(url+"/home?username="+str(username))
+            qrcode = qr.png("qrcode/test/"+str(username)+".png", scale=6)
+        
         today = date.today()
-        day = today.strftime("%d %m %Y")
+        day = today.strftime("%d%m%Y%H%M%S")
         shutil.make_archive('qrcode/qrcode', 'zip', 'qrcode/test')
         
+        di = 'qrcode/test'
+        for d in os.listdir(di):
+            os.remove(os.path.join(di, d))
+          
         print("generate finish")
-
-        return send_file("qrcode/qrcode.zip", mimetype='application/zip', attachment_filename=f'{day}.rar', as_attachment=True)
+        
+            
+        return send_file("qrcode/qrcode.zip", mimetype='application/zip', download_name=f'{day}.zip', as_attachment=True)
 
 
 if __name__ == '__main__':

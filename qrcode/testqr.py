@@ -5,18 +5,18 @@
 import pymysql
 import pyqrcode
 
-def getConnection ():
+def getConnection():
     return pymysql.connect(
-        host = 'localhost',
-        db = 'qrcode_tog',
-        user = 'root',
-        password = '',
-        charset = 'utf8',
-        cursorclass = pymysql.cursors.DictCursor
-		)
+        host='localhost',
+        db='qrcode_tog',
+        user='root',
+        password='',
+        charset='utf8',
+        cursorclass=pymysql.cursors.DictCursor
+    )
     
 connection = getConnection()
-sql = "SELECT * FROM updateuser27062022"
+sql = "SELECT * FROM tog"
 cursor = connection.cursor()
 cursor.execute(sql)
 em = cursor.fetchall()
@@ -24,7 +24,7 @@ em = cursor.fetchall()
 user = []
 
 for x in em:
-  a =str(x.get('user'))
+  a =str(x.get('username'))
   user.append(a)
 
 print(len(user))
@@ -35,7 +35,7 @@ url = "http://203.146.249.6/"
 for i in range(len(user)):
     print(i)
     qr = pyqrcode.create(url+"/home?username="+user[i])
-    qr.png(""+user[i]+".png", scale=6)
+    qr.png("TOG_"+user[i]+".png", scale=6)
     
     
 
