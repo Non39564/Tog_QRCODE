@@ -342,6 +342,24 @@ def genqr():
 def main():
     return render_template('upload.html')
 
+import xlsxwriter
+@app.route('/export_excel')
+def export_excel():
+    workbook = xlsxwriter.Workbook('van_data.xlsx')
+    worksheet = workbook.add_worksheet()
+    user = showUser()
+    worksheet.write(0,0,'Username')
+    worksheet.write(0,1,'Container')
+    worksheet.write(0,2,'Time')
+    worksheet.write(0,3,'Date')
+    for d in range(len(user)):
+        worksheet.write(d+1,0,user[d]['Username'])
+        worksheet.write(d+1,1,user[d]['Container'])
+        worksheet.write(d+1,2,user[d]['Time'])
+        worksheet.write(d+1,3,user[d]['Date'])
+    workbook.close()
+    return send_file("van_data.xlsx", mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', attachment_filename=f'van_data.xlsx', as_attachment=True)
+
 
 @app.route('/uploader', methods=['GET', 'POST'])
 def upload_file():

@@ -49,7 +49,8 @@
       type="text/css"
       href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"
     />
-
+    
+    
     <!-- Sidebar -->
     <link href="../static/dist/css/sidebar.scss" />
 
@@ -62,6 +63,8 @@
         font-size: 48px;
       }
     </style>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Area Chart -->
     <script
@@ -312,6 +315,16 @@
       }
     </script>
     <script>
+      $(document).ready(function() {
+          $('#datatable').DataTable( {
+              dom: 'Bfrtip',
+              buttons: [
+                  'excel'
+              ]
+          } );
+      } );
+  </script>
+    <script>
       function fnExcelReport() {
         var tab_text = "<table border='2px'><tr bgcolor='#87AFC6'>";
         var textRange;
@@ -351,5 +364,6 @@
         return sa;
       }
     </script>
+    
   </body>
 </html>

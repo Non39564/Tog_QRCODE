@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 <head>
   {% block title %}GenQR | {% endblock %}
+  
 </head>
 
 <body>
@@ -105,7 +106,10 @@
                   <input id="submit-btn" class="input" type = "submit" value="Generate from Excel"/><br>
                 </form>
                 {% if msg %}
-                <p onload="load()"></p>
+                  <button onclick="JSalert()">Click me</button>
+                  <div class="alert alert-danger" role="alert">
+                    ชื่อคอลัมน์ผิดพลาด โปรดเช็คอีกครัง
+                  </div>
                 {% endif %}
                 <div class="form">
                 <button 
@@ -125,11 +129,19 @@
       </div>
     </div>
   </div>
-
+  <script>
+    function JSalert(){
+      Swal.fire({
+        icon: 'error',
+        target: '#error',
+        title: 'ชื่อคอลัมน์ผิดพลาด',
+        showConfirmButton: false,
+        timer: 2000
+      });
+      console.log("error")
+    }
+  </script>
   {% endblock %}
 </body>
-<script>
-  function load() {
-    alert("ชื่อคอลัมม์ไม่ถูกต้อง");
-  }
-  </script>
+
+
